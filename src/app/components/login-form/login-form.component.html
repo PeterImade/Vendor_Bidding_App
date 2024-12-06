@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <form method="post" (ngSubmit)="login()">
+            <div class="form-group">
+              <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" [(ngModel)]="email" placeholder="Enter email" required="">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div> <br>
+            <div class="form-group">
+              <input type="password" class="form-control" name="password" id="password" [(ngModel)]="password" placeholder="Password" required="">
+            </div> <br>
+            <button type="submit" routerLink="dashboard" class="btn btn-primary mx-auto">Login</button>
+            @if (this.anyError) {
+              <small class="text-danger">Please enter your email and password. Thank you.</small>
+            }
+        </form> 
+    </div>
+</div>

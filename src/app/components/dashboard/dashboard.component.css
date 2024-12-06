@@ -1,0 +1,15 @@
+.card-container{
+    background-color: rgb(68, 67, 67);
+    color: white;
+    height: 150px;
+    margin: 10px;
+    border-radius: 5%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.description {
+    font-size: 12px;
+}

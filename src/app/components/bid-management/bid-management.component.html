@@ -1,0 +1,10 @@
+<div class="bid-section">
+    <h1>Submitted bids</h1>
+    <ul class="list-group">
+        @for (bid of bids; track $index) {
+            <li> 
+                Project Name: {{ bid.project.name }} - Bid Amount: ${{ bid.amount }} - Status: {{bid.status}}
+            </li>
+        }
+    </ul>
+</div>

@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-md-3 mx-auto mb-5">
+        <div class="card" style="width:400px">
+            <div class="card-body">
+                <h4 class="card-title">{{project?.name}}</h4>
+                <p class="card-text">{{project?.description}}</p>
+                <p class="card-text">{{project?.budget}}</p>
+                <p class="card-text">{{project?.currency}}</p>
+                <p class="card-text">{{project?.category}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 mx-auto">
+        @if (successMessage) {
+        <p class="alert alert-success successMessage">{{successMessage}}</p>
+        }
+        @if (errorMessage) {
+        <p class="alert alert-danger">{{errorMessage}}</p>
+        }
+        @if (!isSubmitted) {
+            <form (ngSubmit)="onSubmitBid()">
+                <div class="form-group">
+                    <label for="bidAmount">Bid Amount</label>
+                    <input type="number" class="form-control" id="bidAmount" [(ngModel)]="bidAmount" name="bidAmount"
+                        required>
+                </div>
+                <button type="submit" class="btn btn-success mt-2">Submit Bid</button>
+            </form>
+        }
+        @if (isSubmitted) {
+            <a class="btn btn-primary" [routerLink]="['bids']">View Submitted Bids</a>
+        }
+    </div>
+</div>
