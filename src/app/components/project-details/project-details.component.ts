@@ -1,10 +1,11 @@
 import { Component, inject, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, RouterModule } from "@angular/router";
-import { MasterService } from "../../../services/master.service"; 
+import { MasterService } from "../../../services/master.service";
 import { IProject } from "../../../models/interfaces/IProject";
 import { IBid } from "../../../models/interfaces/IBid";
 import { APIResponse } from "../../../models/interfaces/AuthResponse";
+import { BidManagementComponent } from "./bid-management/bid-management.component";
 
 @Component({
   selector: "app-project-details",
@@ -13,11 +14,12 @@ import { APIResponse } from "../../../models/interfaces/AuthResponse";
   styleUrl: "./project-details.component.css"
 })
 export class ProjectDetailsComponent implements OnInit {
+  userId: number= 0;
   project: IProject | null = null;
   successMessage: string | null = "";
   errorMessage: string | null = "";
 
-  isSubmitted: boolean = false
+  isSubmitted: boolean = false;
 
   route = inject(ActivatedRoute);
   masterService = inject(MasterService);
@@ -39,19 +41,26 @@ export class ProjectDetailsComponent implements OnInit {
 
   onSubmitBid() {
     if (this.project && this.bidAmount != 0) {
+      
+      this.masterService.getVendorId().subscribe((data: any) => { 
+        console.log("i got here");
+        this.userId = data.vendorId;
+        console.log(this.userId);
+        
+      
+      
+      console.log(`vendor id: ${this.userId}`);
       const bid: IBid = {
-        vendorId: 1, // This should be the authenticated vendor's ID
-        projectId: this.project.id,
+        vendorId: this.userId,
+        projectId: this.project?.id,
         amount: this.bidAmount
       };
       this.masterService.submitBid(bid).subscribe(
         (response: APIResponse) => {
           this.successMessage = "Your bid has been submitted successfully!";
-          this.bidAmount = 0
-          this.isSubmitted = true
+          this.bidAmount = 0;
+          this.isSubmitted = true;
           this.errorMessage = null;
-          console.log(response);
-          
         },
         error => {
           console.error("Error submitting bid:", error);
@@ -59,7 +68,9 @@ export class ProjectDetailsComponent implements OnInit {
             "There was an error submitting your bid. Please try again later.";
           this.successMessage = null;
         }
-      );
+      );},  error => {
+        console.error("Error occurred:", error); 
+      });
     }
   }
 }

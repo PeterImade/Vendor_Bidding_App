@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { Observable } from "rxjs"; 
+import { Observable } from "rxjs";
 import { APIResponse } from "../models/interfaces/AuthResponse";
 import { IBid } from "../models/interfaces/IBid";
 import { Auth } from "../models/interfaces/Auth";
@@ -9,7 +9,7 @@ import { Auth } from "../models/interfaces/Auth";
   providedIn: "root"
 })
 export class MasterService {
-  http = inject(HttpClient)
+  http = inject(HttpClient);
 
   getProjects(): Observable<APIResponse> {
     return this.http.get<APIResponse>("https://localhost:7152/api/projects");
@@ -22,16 +22,20 @@ export class MasterService {
   submitBid(bid: IBid): Observable<APIResponse> {
     return this.http.post<APIResponse>("https://localhost:7152/api/bids", bid);
   }
-  getBids(vendorId: number): Observable<APIResponse> {
+  getBids(vendorId: any): Observable<APIResponse> {
     return this.http.get<APIResponse>(
       `https://localhost:7152/api/bids/${vendorId}`
     );
   }
   loginVendor(auth: Auth): Observable<string> {
-    return this.http.post<string>(
-      "https://localhost:7152/api/auth/login",
-      auth,
-      { responseType: 'text' as 'json' }
-    );
+    return this.http.post<
+      string
+    >("https://localhost:7152/api/auth/login", auth, {
+      responseType: "text" as "json"
+    });
+  }
+
+  getVendorId() {
+    return this.http.get("https://localhost:7152/api/auth/get-vendor-id");
   }
 }

@@ -1,9 +1,9 @@
 import { RouterModule, Routes } from '@angular/router';
 import { LoginFormComponent } from './components/login-form/login-form.component';
-import { BidManagementComponent } from './components/bid-management/bid-management.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { NgModule } from '@angular/core';
+import { BidManagementComponent } from './components/project-details/bid-management/bid-management.component';
 
 export const routes: Routes = [
     { path: "", redirectTo: "login", pathMatch: "full" },

@@ -1,5 +1,5 @@
 export interface IBid {
     vendorId: number; 
-    projectId: number; 
+    projectId: number | undefined; 
     amount: number;   
   }

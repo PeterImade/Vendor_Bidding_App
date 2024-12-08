@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from "@angular/core";
 import { ProjectDetailsComponent } from "../project-details/project-details.component";
-import { BidManagementComponent } from "../bid-management/bid-management.component";
 import { MasterService } from "../../../services/master.service";
 import { RouterModule } from "@angular/router";
 import { IProject } from "../../../models/interfaces/IProject"; 
